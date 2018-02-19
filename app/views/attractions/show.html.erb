@@ -1,0 +1,41 @@
+<% attraction = Attraction.find_by(id: params["id"]) %>
+<% reviews = attraction.reviews %>
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+      <h2><%= attraction.name %></h2>
+  </div>
+
+  <div class="col-lg-8 text-center">
+    <a href="<%= attraction.website %>">Website</a>
+    <div>
+      <%= image_tag(attraction.image_url, class: "img-fluid") %>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <p>Address: <span><%= attraction.address %></span></p>
+    <iframe width="300" height="400" frameborder="0" style="border:0"
+    src="<%="https://www.google.com/maps/embed/v1/place?zoom=15&q="+attraction.address+"&key=AIzaSyADxGrJuMrzDJtkHYYz-umbJIcb7Ymlj1o" %>" allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 text-center">
+      <p> Been here? What do you think? </p>
+      <%= form_tag "/reviews" do %>
+        <p>Rating</p>
+        <input type="radio" name="rating" value="5" checked> 5<br>
+        <input type="radio" name="rating" value="4"> 4<br>
+        <input type="radio" name="rating" value="3"> 3<br>
+        <input type="radio" name="rating" value="2"> 2<br>
+        <input type="radio" name="rating" value="1"> 1<br>
+        <p>Comments <input name="name" type="text" autofocus class="form-control"></p>
+        <button class="btn btn-primary">Post Review</button>
+      <% end %>
+    </div>
+    <div class="col-lg-8 text-center">
+      <h6>There are <%= reviews.count %> reviews for this attraction.</h6>
+    </div>
+</div>

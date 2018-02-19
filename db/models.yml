@@ -4,6 +4,36 @@
 #
 # Indent consistently!  Follow the syntax carefully!
 #
+Destination
+  name: text
+  introduction: text
+  cover_url: text
+
+Attraction
+  name: text
+  destination_id: integer
+  type_id: integer
+  image_url: text
+  address: text
+  website: text
+  latitude: float
+  longitude: float
+
+Type
+  name: text
+
+Review
+  rating: integer
+  comment: text
+  user_id: integer
+  attraction_id: integer
+
+User
+  username: text
+  email: text
+  password: text
+  admin: boolean
+
 # Example:
 #
 # Book

@@ -1,0 +1,28 @@
+<h3>Add Attraction</h3>
+
+<div class="row">
+  <div class="col-lg-4">
+
+    <%= form_tag "/attractions" do %>
+
+      <p>Name: <input name="name" type="text" autofocus class="form-control"></p>
+      <p>Destination:</p>
+      <select name="destination">
+        <% Destination.all.order("name").each do |destination| %>
+          <option value="<%= destination.id %>"><%= destination.name %></option>
+        <% end %>
+      </select>
+      <p>Type:</p>
+      <select name="type">
+        <% Type.all.order("name").each do |type| %>
+          <option value="<%= type.id %>"><%= type.name %></option>
+        <% end %>
+      </select>
+      <p>Website: <input name="website" type="text" class="form-control"></p>
+      <p>Address: <input name="address" type="text" class="form-control"></p>
+      <p>Image_url: <input name="image_url" type="text" class="form-control"></p>
+      <button class="btn btn-primary">Submit</button>
+    <% end %>
+
+  </div>
+</div>

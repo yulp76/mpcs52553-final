@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Change This Title</title>
+    <title>Things to Do</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,13 +13,76 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+    /* Container holding the image and the text */
+    p {
+        text-align: justify;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    /* Bottom right text */
+    .text-block {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: black;
+        opacity: 0.8;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+    </style>
   </head>
 
   <body>
     <div class="container-fluid">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">City Explorer</a>
 
-      <%= yield %>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Destinations</a>
+                <div class="dropdown-menu">
+                  <% Destination.all.order('name').each do |destination| %>
+                    <%= link_to destination[:name], "/destinations/#{destination.id}", { :class=>"dropdown-item" } %>
+                  <% end %>
+                </div>
+          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Wish List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/attractions">Attractions (Admin Only)</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <% if session[:user_id] != nil %>
+              <li class="nav-item">Hi, <%= User.find_by(id: session[:user_id]).email %></li>
+              <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            <% else %>
+              <li class="nav-item"><a class="nav-link" href="/users/new">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link" href="/sessions/new">Login</a></li>
+            <% end %>
+        </ul>
+      </nav>
     </div>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+
   </body>
 </html>

@@ -12,15 +12,53 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "books", force: :cascade do |t|
-    t.text "title"
-    t.integer "author_id"
-    t.text "summary"
-    t.integer "price"
-    t.boolean "hardcover", default: false
+  create_table "attractions", force: :cascade do |t|
+    t.text "name"
+    t.integer "destination_id"
+    t.integer "type_id"
+    t.text "image_url"
+    t.text "address"
+    t.text "website"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["destination_id"], name: "index_attractions_on_destination_id"
+    t.index ["type_id"], name: "index_attractions_on_type_id"
+  end
+
+  create_table "destinations", force: :cascade do |t|
+    t.text "name"
+    t.text "introduction"
+    t.text "cover_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "attraction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attraction_id"], name: "index_reviews_on_attraction_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.text "username"
+    t.text "email"
+    t.text "password"
+    t.boolean "admin", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

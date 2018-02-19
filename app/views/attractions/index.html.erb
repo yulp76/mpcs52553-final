@@ -1,0 +1,27 @@
+<div class="row">
+
+  <div class="my-3">
+    <%= link_to "Add a New Attraction", "/attractions/new", class: 'btn btn-primary' %>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Destination</th>
+        <th>Attraction</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Attraction.all.order('name').each do |attraction| %>
+        <tr>
+          <td><%= link_to attraction.destination.name, "/destinations/#{attraction.destination.id}" %> </td>
+          <td><%= link_to attraction.name, "/attractions/#{attraction.id}" %></td>
+          <td><%= link_to "Edit", "/attractions/#{attraction.id}/edit" %></td>
+          <td><%= link_to "Delete", "/attractions/#{attraction.id}", method: 'delete' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

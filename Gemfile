@@ -30,3 +30,7 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'geocoder'
+gem 'turbolinks', '~> 5.0.0'
+gem 'validates_email_format_of'
