@@ -1,0 +1,7 @@
+Score: 20/20
+
+Nice work!  I'm not sure if you're run into trouble with
+a model named 'Type'.  I don't think so, but if you start
+encountering unexplainable error messages related to it,
+you might have to rename it to something else.
+ 
