@@ -5,19 +5,21 @@
       <div class="col-lg-9 text-center">
           <h2 class="col attraction"><%= attraction.name %></h2>
       </div>
-      <div class="col-lg-3 my-1">
-        <% if wish == nil %>
-          <%= form_tag "/wishes" do %>
-            <input type="hidden" name="user_id" value="<%= user_id %>">
-            <input type="hidden" name="attraction_id" value="<%= attraction.id %>">
-            <button class="btn btn-success">Add to Wishlist</button>
+      <% if user_id != nil %>
+        <div class="col-lg-3 my-1">
+          <% if wish == nil %>
+            <%= form_tag "/wishes" do %>
+              <input type="hidden" name="user_id" value="<%= user_id %>">
+              <input type="hidden" name="attraction_id" value="<%= attraction.id %>">
+              <button class="btn btn-success">Add to Wishlist</button>
+            <% end %>
+          <% else %>
+            <%= form_tag "/wishes/#{wish.id}", method: "delete" do %>
+              <button class="btn btn-danger">Remove from Wishlist</button>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= form_tag "/wishes/#{wish.id}", method: "delete" do %>
-            <button class="btn btn-danger">Remove from Wishlist</button>
-          <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="row justify-content-center">
