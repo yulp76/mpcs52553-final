@@ -1,4 +1,4 @@
-<% keyword = params["keyword"].lstrip.rstrip %>
+<% keyword = params["keyword"].lstrip.rstrip.downcase %>
 <% if keyword.length < 3 %>
   <div class="row justify-content-center">
     <div class="col-lg-5 text-center">
@@ -6,7 +6,7 @@
     </div>
   </div>
 <% else %>
-  <% attractions = Attraction.where('name LIKE ?', "%#{keyword}%") %>
+  <% attractions = Attraction.where('lower(name) LIKE ?', "%#{keyword}%") %>
   <div class="row justify-content-center">
     <div class="col-lg-2 my-2 bordered text-center title">
       <h3>Search Result</h3>
