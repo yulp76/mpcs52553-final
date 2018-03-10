@@ -1,0 +1,15 @@
+<div class="row justify-content-center">
+  <div class="col-lg-4 text-center">
+    <h2 style="font-weight: bold;">Welcome back!</h2>
+
+    <%= form_tag "/sessions" do %>
+
+      <p>Enter your username:<input name="username" type="text" autofocus class="form-control"></p>
+      <p>Enter you password:<input name="password" type="password" class="form-control"></p>
+
+      <button class="btn btn-success">Login</button>
+
+    <% end %>
+
+  </div>
+</div>

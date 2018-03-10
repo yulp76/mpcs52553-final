@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-lg-9 my-2">
+    <div class="row justify-content-center">
+      <div class="col-lg-3">
+        <h4>Select Categories</h4>
+
+        <%= form_tag "/destinations/#{params["id"]}", method: "get" do %>
+          <% category_ids.each do |id| %>
+            <% if selected.include?(id) %>
+              <input type="checkbox" name="category[]" value="<%= id %>" checked> <%= Category.find_by(id: id).name %> (<%= count[id] %>) <br>
+            <% else %>
+              <input type="checkbox" name="category[]" value="<%= id %>"> <%= Category.find_by(id: id).name %> (<%=count[id]%>) <br>
+            <% end %>
+          <% end %>
+            <button class="btn btn-success">Filter</button>
+        <% end %>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="row">
+            <% attractions.each do |attraction| %>
+              <div class="col-lg-4">
+                <div class="card my-1" style="width:200px height:200px">
+                  <%= image_tag(attraction.image_url, class: "card-img-top attraction_small") %>
+                  <div class="card-body">
+                    <h5><%= link_to attraction.name, "/attractions/#{attraction.id}" %></h5>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

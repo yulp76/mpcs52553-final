@@ -1,0 +1,64 @@
+<div class="container-fluid" style="font-family: 'Cambria'" >
+  <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #2ca25f;">
+    <a class="navbar-brand" href="/">
+      <span class="fas fa-suitcase"></span>
+      <span>Where to Visit?</span>
+    </a>
+
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="destdrop" data-toggle="dropdown">Destinations</a>
+            <div class="dropdown-menu">
+              <% Destination.all.order('name').each do |destination| %>
+                <%= link_to destination[:name], "/destinations/#{destination.id}", { :class=>"dropdown-item" } %>
+              <% end %>
+            </div>
+      </li>
+
+      <% if session[:user_id] != nil %>
+        <li class="nav-item">
+          <a class="nav-link" href="/wishes">Wish List</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/reviews">My Reviews</a>
+        </li>
+      <% end %>
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <%= form_tag "/search", method: "get", class: "form-inline mr-3" do %>
+        <input name="keyword" class="form-control mr-1" size="20" type="search" placeholder="Search attraction" aria-label="Search">
+        <button class="btn btn-success btn-outline-light" type="submit">
+          <span class="fas fa-search"></span>
+        </button>
+      <% end %>
+
+        <% if session[:user_id] != nil && User.find_by(id: session[:user_id]) != nil%>
+          <li class="navbar-brand">Hi, <%= User.find_by(id: session[:user_id]).username %>!</li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= "/users/#{session[:user_id]}"%>">My Account</a>
+          </li>
+
+          <% if session[:admin] %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="admindrop" data-toggle="dropdown">Administration</a>
+                  <div class="dropdown-menu">
+                      <%= link_to "Manage Destinations", "/manage_destinations", { :class=>"dropdown-item" } %>
+                      <%= link_to "Manage Attractions", "/attractions", { :class=>"dropdown-item" } %>
+                      <%= link_to "Manage Categories", "/categories", { :class=>"dropdown-item" } %>
+                      <%= link_to "Manage Users", "/users", { :class=>"dropdown-item" } %>
+                  </div>
+            </li>
+          <% end %>
+
+          <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        <% else %>
+          <li class="nav-item"><a class="nav-link" href="/users/new">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="/sessions/new">Login</a></li>
+        <% end %>
+    </ul>
+
+  </nav>
+</div>

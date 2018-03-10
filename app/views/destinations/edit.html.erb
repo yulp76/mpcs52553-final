@@ -1,0 +1,15 @@
+<% destination = Destination.find_by(id: params["id"]) %>
+
+<h3>Editing <%= destination.name %></h3>
+
+<div class="row">
+  <div class="col-lg-6">
+
+    <%= form_tag "/destinations/#{destination.id}", method: "patch" do %>
+      <textarea name="introduction" class="form-control" rows="10" placeholder="At least 300 characters."><%=destination.introduction%></textarea>
+      <p>Cover_url: <input name="cover_url" value="<%=destination.cover_url%>" type="text" class="form-control"></p>
+      <button class="btn btn-success">Update</button>
+    <% end %>
+
+  </div>
+</div>

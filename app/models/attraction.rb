@@ -1,11 +1,9 @@
 class Attraction < ApplicationRecord
-  # geocoded_by :address
-  # after_validation :geocode
   belongs_to :destination
-  belongs_to :type
+  belongs_to :category
   has_many :reviews
-  has_many :wish_lists
-  has_many :users, through: :wish_lists
+  has_many :wishes
+  has_many :users, through: :wishes
   validates :name, presence: true
   validates :image_url, presence: true
   validates :address, presence: true

@@ -3,7 +3,7 @@
 <h3>Editing <%= attraction.name %></h3>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-6">
 
     <%= form_tag "/attractions/#{attraction.id}", method: "patch" do %>
 
@@ -18,13 +18,13 @@
           <% end %>
         <% end %>
       </select>
-      <p>Type:</p>
-      <select name="type">
-        <% Type.all.order("name").each do |type| %>
-          <% if attraction.type_id == type.id %>
-            <option selected="selected" value="<%= type.id %>"><%= type.name %></option>
+      <p>Category:</p>
+      <select name="category">
+        <% Category.all.order("name").each do |category| %>
+          <% if attraction.category_id == category.id %>
+            <option selected="selected" value="<%= category.id %>"><%= category.name %></option>
           <% else %>
-            <option value="<%= type.id %>"><%= type.name %></option>
+            <option value="<%= category.id %>"><%= category.name %></option>
           <% end %>
         <% end %>
       </select>

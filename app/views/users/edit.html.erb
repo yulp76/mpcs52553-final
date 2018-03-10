@@ -1,0 +1,22 @@
+<% if @user.errors.any? %>
+<ul>
+  <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 my-5 text-center">
+    <%= form_tag "/users/#{params["id"]}", method: "patch" do %>
+
+      <p>Enter you old password:<input name="password_old" type="password" class="form-control"></p>
+      <p>Enter you new password (at least 8 characters):<input name="password" type="password" class="form-control"></p>
+      <p>Re-Enter you new password:<input name="password_confirmation" type="password" class="form-control"></p>
+
+      <button class="btn btn-success">Update</button>
+
+    <% end %>
+
+  </div>
+</div>

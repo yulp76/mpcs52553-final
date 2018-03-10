@@ -15,6 +15,11 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'turbolinks', '~> 5.0.0'
+gem 'validates_email_format_of'
+gem 'bcrypt', '~> 3.1.7'
 
 
 group :development, :test do
@@ -28,9 +33,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'geocoder'
-gem 'turbolinks', '~> 5.0.0'
-gem 'validates_email_format_of'

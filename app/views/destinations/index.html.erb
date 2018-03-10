@@ -2,12 +2,12 @@
 
   <% Destination.all.order('name asc').each do |destination| %>
 
-    <div class="col-sm-12 col-md-6 col-lg-4 my-3 text-center">
-      <div class="container">
-        <img class="img-fluid" src="<%=destination.cover_url %>">
+    <div class="col-lg-4 text-center">
+      <div class="container destination">
+        <img class="img-fluid destination" src="<%=destination.cover_url %>">
         <div class="text-block">
-          <h4><%= link_to destination.name, "/destinations/#{destination.id}" %></h4>
-        </div>      
+          <h4 class="destination"><%= link_to destination.name, "/destinations/#{destination.id}" %></h4>
+        </div>
       </div>
     </div>
   <% end %>

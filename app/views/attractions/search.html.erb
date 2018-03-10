@@ -1,0 +1,35 @@
+<% keyword = params["keyword"].lstrip.rstrip %>
+<% if keyword.length < 3 %>
+  <div class="row justify-content-center">
+    <div class="col-lg-5 text-center">
+      <h4>Please enter a longer search term.</h4>
+    </div>
+  </div>
+<% else %>
+  <% attractions = Attraction.where('name LIKE ?', "%#{keyword}%") %>
+  <div class="row justify-content-center">
+    <div class="col-lg-2 my-2 bordered text-center title">
+      <h3>Search Result</h3>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+  <% if not attractions.exists? %>
+    <div class="col-lg-5 text-center">
+      <h4>No attraction matches your keyword. Please try something else.</h4>
+    </div>
+  <% else %>
+    <div class="row justify-content-center">
+      <% attractions.each do |attraction| %>
+        <div class="col-lg-2">
+          <div class="card my-1" style="width:200px height:200px">
+            <%= image_tag(attraction.image_url, class: "card-img-top attraction_small") %>
+            <div class="card-body">
+              <h5><%= link_to attraction.name, "/attractions/#{attraction.id}" %></h5>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,32 @@
+<% user_id = session[:user_id] %>
+<% wishes = Wish.where(user_id: user_id) %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-2 my-2 bordered text-center title">
+    <h3>My Wish List</h3>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <% if not wishes.exists? %>
+    <h4>My wish list is empty.</h4>
+  <% else %>
+    <% wishes.each do |wish| %>
+      <% attraction = Attraction.find_by(id: wish.attraction_id) %>
+        <div class="col-lg-2">
+          <div class="card my-1" style="width:200px height:200px">
+            <%= image_tag(attraction.image_url, class: "card-img-top attraction_small") %>
+            <div class="card-body">
+              <h5><%= link_to attraction.name, "/attractions/#{attraction.id}" %></h5>
+            </div>
+            <div class="card-footer">
+              <%= form_tag "/wishes/#{wish.id}", method: "delete" do %>
+                <input type="hidden" name="back_to_wish_list" value="<%=true%>">
+                <button class="btn btn-danger">Remove</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>

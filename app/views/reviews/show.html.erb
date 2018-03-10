@@ -1,0 +1,35 @@
+<% user_id = session[:user_id] %>
+<% reviews = Review.where(user_id: user_id) %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-2 my-2 bordered text-center title">
+    <h3>My Reviews</h3>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <% if not reviews.exists? %>
+    <h4>I haven't left any review yet.</h4>
+  <% else %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Attraction</th>
+          <th>Created at</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reviews.order("created_at DESC").each do |review| %>
+          <tr>
+            <td><%= link_to review.attraction.name, "/attractions/#{review.attraction_id}" %></td>
+            <td><%= review.created_at %></td>
+            <td><%= link_to "Edit", "/reviews/#{review.id}/edit" %></td>
+            <td><%= link_to "Delete", "/reviews/#{review.id}", method: 'delete' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

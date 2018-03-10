@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-lg-9 my-3 bordered">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-9 text-center">
+          <h2 class="col attraction"><%= attraction.name %></h2>
+      </div>
+      <div class="col-lg-3 my-1">
+        <% if wish == nil %>
+          <%= form_tag "/wishes" do %>
+            <input type="hidden" name="user_id" value="<%= user_id %>">
+            <input type="hidden" name="attraction_id" value="<%= attraction.id %>">
+            <button class="btn btn-success">Add to Wishlist</button>
+          <% end %>
+        <% else %>
+          <%= form_tag "/wishes/#{wish.id}", method: "delete" do %>
+            <button class="btn btn-danger">Remove from Wishlist</button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card" style="width:400px height:400px">
+          <%= image_tag(attraction.image_url, class: "card-img-top attraction") %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 text-center">
+                <% if reviews.exists? %>
+                  <h1> <%='%.1f' % reviews.average(:rating)%>/5 </h1>
+                <% else %>
+                  <h3> Not Enough Ratings</h3>
+                <% end %>
+              </div>
+              <div class="col-sm-6 text-center">
+                <h5><%= attraction.category.name %></h5>
+                <a href="<%= attraction.website %>">Website</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card" style="width:400px height:400px">
+          <div class="card-header">
+              <h5 class="text-center"><%= attraction.address %></h5>
+          </div>
+          <iframe class="card-img-bottom" height="350px" frameborder="0" style="border:0"
+          src="<%="https://www.google.com/maps/embed/v1/place?zoom=15&q="+attraction.name+" "+attraction.destination.name+"&key=AIzaSyADxGrJuMrzDJtkHYYz-umbJIcb7Ymlj1o" %>" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

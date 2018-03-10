@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-lg-9 my-3 bordered">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 mx-2">
+        <h5><%= reviews.count %> review(s) on this attraction.</h5>
+        <hr>
+        <% reviews.order("created_at").each do |review| %>
+          <span style="width: 500px; word-wrap:break-word; display:inline-block;">
+            <%= review.comment %>
+          </span>
+          <hr>
+        <% end %>
+      </div>
+
+      <% if reviews.find_by(user_id: user_id).nil? %>
+        <div class="col-lg-4 mx-2">
+          <h5>Been here?<br> What do you think? </h5>
+          <%= form_tag "/reviews" do %>
+            <p>Pick a rating:
+            <input type="radio" name="rating" value="5" checked> 5
+            <input type="radio" name="rating" value="4"> 4
+            <input type="radio" name="rating" value="3"> 3
+            <input type="radio" name="rating" value="2"> 2
+            <input type="radio" name="rating" value="1"> 1
+            </p>
+            <input type="hidden" name="user_id" value="<%= user_id %>">
+            <input type="hidden" name="attraction_id" value="<%= attraction.id %>">
+            <p>Leave a comment:
+            <textarea name="comment" class="form-control" rows="5" placeholder="100-2000 characters"></textarea>
+            </p>
+            <button class="btn btn-success">Post Review</button>
+          <% end %>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
