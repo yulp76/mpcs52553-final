@@ -2,7 +2,7 @@
 
 This is a simple web app that resembles the "Things to Do" section on TripAdvisor. It covers over 200 popular tourist attractions across 9 cities in the United States.
 
-[Heroku deployment address](https://wheretovisit.herokuapp.com/)
+[Heroku deployment](https://wheretovisit.herokuapp.com/)
 
 Administrator account:
 * Username: "admin"

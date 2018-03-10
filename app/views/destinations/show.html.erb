@@ -7,9 +7,7 @@
 <% end %>
 
 <% selected = params[:category] %>
-<% if selected == nil %>
-  <% selected = category_ids %>
-<% else %>
+<% if selected != nil %>
   <% selected = selected.map(&:to_i) %>
   <% attractions = destination.attractions.where(category_id: selected) %>
 <% end %>
